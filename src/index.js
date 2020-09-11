@@ -9,6 +9,7 @@ const {
   HTTP_NOT_FOUND,
   HTTP_BAD_REQUEST
 } = require('./HttpStatuses');
+const carts = [];
 
 const init = async () => {
   const server = Hapi.server({
@@ -44,9 +45,30 @@ const init = async () => {
     path: '/cart/{id?}',
     handler: (request, h) => {
       const id = request.params.id || null;
+      if (!id) {
+        // keep just one cart
+        if (!carts.length) {
+          carts.push(new Cart());
+          return h
+            .response(carts)
+            .code(HTTP_OK);
+        }
+      }
 
+      const cart = carts.find(cart => cart.id === id);
 
-      return `implement cart GET on id: ${id}`;
+      if (!cart) {
+        return h
+          .response({
+            message: 'Cart not found'
+          })
+          .code(HTTP_NOT_FOUND);
+      }
+
+      return h
+        .response(cart)
+        .code(HTTP_OK); 
+      // return `implement cart GET on id: ${id}`;
     }
   });
 
