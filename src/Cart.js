@@ -17,6 +17,7 @@ class Cart {
 
       this.items = this.items.map(item => {
         if (item.name === name) {
+          alreadyInCart = true;
           return {
             ...item,
             qty: item.qty + 1
@@ -40,10 +41,20 @@ class Cart {
   }
 
   /**
-   * Deletes an item from the cart
+   * Deletes an item from the cart by name
    */
   deleteItem({ name }) {
+    const found = this.items.find(item => item.name === name);
 
+    if (!found) {
+      return false;
+    }
+
+    this.items = this.items.filter(item => {
+      return item.name !== name;
+    });
+    this.updateTotal();
+    return this;
   }
 
   /**
@@ -53,7 +64,7 @@ class Cart {
    */
   updateTotal() {
     const total = this.items.reduce((sum, item) => {
-      return sum + (item.price * item.qty)
+      return sum + (item.price * item.qty);
     }, 0);
 
     this.total = this.round(total)

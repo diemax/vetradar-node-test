@@ -68,7 +68,6 @@ const init = async () => {
       return h
         .response(cart)
         .code(HTTP_OK); 
-      // return `implement cart GET on id: ${id}`;
     }
   });
 
@@ -81,7 +80,29 @@ const init = async () => {
     handler: (request, h) => {
       const { id } = request.params;
 
-      return `implement cart POST/PUT on id: ${id}`;
+      if (!id) {
+        return h
+          .response({
+            message: 'Bad Request',
+          })
+          .code(HTTP_BAD_REQUEST);
+      }
+
+      const cart = carts.find(cart => cart.id === id);
+
+      if (!cart) {
+        return h
+          .response({
+            message: 'Cart not found'
+          })
+          .code(HTTP_NOT_FOUND);
+      }
+
+      const result = cart.addItem(request.payload);
+      
+      return h
+        .response(result)
+        .code(HTTP_CREATED);
     }
   });
 
