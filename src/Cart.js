@@ -11,6 +11,7 @@ class Cart {
    * Add a new item to the cart or increase the qty
    * If the item already exists (by name)
    * @param {name, price}  
+   * @returns Cart
    */
   addItem({ name, price }) {
       let alreadyInCart = false;
@@ -42,8 +43,10 @@ class Cart {
 
   /**
    * Deletes an item from the cart by name
+   * 
+   * @returns Cart | boolean
    */
-  deleteItem({ name }) {
+  deleteItem(name) {
     const found = this.items.find(item => item.name === name);
 
     if (!found) {

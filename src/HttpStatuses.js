@@ -1,11 +1,13 @@
 const HTTP_OK = 200;
 const HTTP_CREATED = 201;
+const HTTP_NO_CONTENT = 204;
 const HTTP_NOT_FOUND = 404;
 const HTTP_BAD_REQUEST = 503;
 
 module.exports = {
   HTTP_OK,
   HTTP_CREATED,
+  HTTP_NO_CONTENT,
   HTTP_NOT_FOUND,
   HTTP_BAD_REQUEST
 }

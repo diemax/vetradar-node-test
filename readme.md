@@ -133,10 +133,10 @@ $ curl --header "Content-Type: application/json" --request POST  --data '{"name"
 
 ### Request
 
-`DELETE /cart/id`
+`DELETE /cart/{id}/{item}`
 
 ```
-$ curl -i -H 'Accept: application/json' -X DELETE http://localhost:3000/cart/1/
+$ curl -i -H 'Accept: application/json' -X DELETE http://localhost:3000/cart/1/item/1
 ```
 
 ### Response
@@ -146,4 +146,5 @@ $ curl -i -H 'Accept: application/json' -X DELETE http://localhost:3000/cart/1/
     Status: 204 No Content
     Connection: close
 
-
+### Thanks for reviewing my application!
+### Happy hacking! :) 
