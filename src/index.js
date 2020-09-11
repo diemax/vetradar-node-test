@@ -1,7 +1,14 @@
 'use strict';
 
 const Hapi = require('@hapi/hapi');
-const {Store} = require('./store');
+const { Store } = require('./store');
+const { Cart } = require('./Cart');
+const {
+  HTTP_OK,
+  HTTP_CREATED,
+  HTTP_NOT_FOUND,
+  HTTP_BAD_REQUEST
+} = require('./HttpStatuses');
 
 const init = async () => {
   const server = Hapi.server({
@@ -50,7 +57,7 @@ const init = async () => {
     method: ['PUT', 'POST'],
     path: '/cart/{id}',
     handler: (request, h) => {
-      const {id} = request.params;
+      const { id } = request.params;
 
       return `implement cart POST/PUT on id: ${id}`;
     }
@@ -63,7 +70,7 @@ const init = async () => {
     method: 'DELETE',
     path: '/cart/{id}',
     handler: (request, h) => {
-      const {id} = request.params;
+      const { id } = request.params;
 
       return `implement cart DELETE on id: ${id}`;
     }
